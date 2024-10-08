@@ -33,4 +33,6 @@
     <string name="done">done</string>
     <string name="search">click to search</string>
     <string name="display_menu">click to display menu</string>
+    <string name="home">Home</string>
+    <string name="drop_down_menu">drop down menu</string>
 </resources>

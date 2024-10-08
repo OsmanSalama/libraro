@@ -9,4 +9,5 @@
     <color name="gruvbox_dark">#282828</color>
     <color name="grey">#BAB4B4</color>
     <color name="red">#FF0000</color>
+    <color name="gruvbox_dark_soft">#504945</color>
 </resources>

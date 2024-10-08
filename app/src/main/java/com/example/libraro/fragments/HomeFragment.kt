@@ -7,6 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -22,24 +23,21 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
-        // Initialize the toolbar
         val toolbar = view.findViewById<Toolbar>(R.id.custom_toolbar)
 
-        // Set the toolbar as the ActionBar
         (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
 
-        // Enable the back button (if desired)
+        // setting the menu icon on the left of the bar
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationIcon(R.drawable.ic_menu)
 
-        // Handle back press
+
+        // click listener when menu icon is clicked
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                // Handle back press here
-                // For example:
-                requireActivity().finish()
+                Toast.makeText(requireContext(), "Pressed", Toast.LENGTH_SHORT).show()
             }
         })
 

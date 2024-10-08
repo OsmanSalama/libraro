@@ -22,10 +22,6 @@ class SignInFragment : Fragment() {
     private lateinit var _binding: FragmentSignInBinding
     private val binding get() = _binding
     private lateinit var auth: FirebaseAuth
-//    private lateinit var imageViewBack: ImageView
-//    private lateinit var textViewSignUp: TextView
-//    private lateinit var progressBar: ProgressBar
-//    private lateinit var btnSignIn: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -20,9 +20,10 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/custom_toolbar"
             android:layout_width="match_parent"
+            app:theme="@style/PopupMenuStyle"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/gruvbox_dark"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:popupTheme="@style/PopupMenuOverlayStyle"
             app:title="Home"
             app:titleTextColor="@android:color/white" />
     </com.google.android.material.appbar.AppBarLayout>
