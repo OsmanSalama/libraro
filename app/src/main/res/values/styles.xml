@@ -1,0 +1,7 @@
+<resources>
+    <style name="CustomToolbarTitle">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textDirection">rtl</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+</resources>
