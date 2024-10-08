@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="btn_main">#282828</color>
+    <color name="main_background">#FBF0D9</color>
+    <color name="btn_light_gruvbox_grey">#504945</color>
+    <color name="btn_light_grey">#7A282828</color>
+    <color name="gruvbox_dark">#282828</color>
+    <color name="grey">#BAB4B4</color>
+    <color name="red">#FF0000</color>
+</resources>
