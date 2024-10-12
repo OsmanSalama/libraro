@@ -1,3 +1,5 @@
+package com.example.libraro.model
+
 import com.google.firebase.firestore.PropertyName
 import com.google.firebase.Timestamp
 

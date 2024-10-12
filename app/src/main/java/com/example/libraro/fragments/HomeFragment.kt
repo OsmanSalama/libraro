@@ -1,12 +1,14 @@
 package com.example.libraro.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -19,13 +21,23 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.findViewTreeViewModelStoreOwner
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.libraro.R
 import com.google.firebase.auth.FirebaseAuth
 import org.w3c.dom.Text
+import com.bumptech.glide.Glide
+import com.example.libraro.adapter.BooksAdapter
+import com.example.libraro.model.Book
+import com.example.libraro.model.User
+import com.google.firebase.firestore.FirebaseFirestore
 
 class HomeFragment : Fragment() {
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var auth: FirebaseAuth
+    private lateinit var bookAdapter: BooksAdapter
+    private val bookList = mutableListOf<Book>()
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -78,8 +90,15 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupMenu()
 
-        val textView: TextView = view.findViewById(R.id.userId)
-        textView.text = auth.currentUser?.uid.toString()
+        // Setup RecyclerView
+        val bookRecyclerView = view.findViewById<RecyclerView>(R.id.bookRecyclerView)
+        val layoutManager = GridLayoutManager(requireContext(), 5) // Change here to use GridLayoutManager
+        bookRecyclerView.layoutManager = layoutManager
+        bookAdapter = BooksAdapter(bookList)
+        bookRecyclerView.adapter = bookAdapter
+
+        // Fetch data from Firestore
+        fetchBooksFromFirestore()
     }
 
     private fun setupMenu() {
@@ -100,12 +119,19 @@ class HomeFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Let the drawer toggle handle menu item clicks
-        if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
-            return true
-        }
-        return super.onOptionsItemSelected(item)
+    private fun fetchBooksFromFirestore() {
+        db.collection("books").get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    val book = document.toObject(Book::class.java)
+                    bookList.add(book)
+                }
+                bookAdapter.notifyDataSetChanged()
+            }
+            .addOnFailureListener { e ->
+                Log.e(tag,"Error loading data: $e")
+            }
     }
+
+
 }

@@ -1,6 +1,6 @@
 package com.example.libraro
 
-import User
+import com.example.libraro.model.User
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
@@ -92,13 +92,14 @@ class MainActivity : AppCompatActivity() {
                         nameTextView.text = userFullName
                     }
                 } else {
-                    nameTextView.text = "User Not Found"
+                    nameTextView.text = "com.example.libraro.model.User Not Found"
                 }
             }
             .addOnFailureListener { exception ->
-                nameTextView.text = "Error Loading User"
+                nameTextView.text = "Error Loading com.example.libraro.model.User"
                 Log.e("MainActivity", "Error fetching user data", exception)
             }
+
     }
 
     private fun logoutUser() {
