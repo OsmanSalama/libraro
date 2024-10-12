@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn = "navigation_view">
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/nav_home"
+            android:title="@string/home"/>
+
+        <item
+            android:id="@+id/nav_nowReading"
+            android:icon="@drawable/nav_now_reading"
+            android:title="@string/now_reading"/>
+
+        <item
+            android:id="@+id/nav_wishlist"
+            android:icon="@drawable/wishlist"
+            android:title="@string/wishlist"/>
+
+        <item
+            android:id="@+id/nav_favorite"
+            android:icon="@drawable/favorite"
+            android:title="@string/favourite"/>
+
+        <item
+            android:id="@+id/nav_categories"
+            android:icon="@drawable/category"
+            android:title="@string/categories"/>
+
+        <item
+            android:id="@+id/nav_analytics"
+            android:icon="@drawable/analytics"
+            android:title="@string/analytics"/>
+
+        <item
+            android:id="@+id/nav_pdfUpload"
+            android:icon="@drawable/pdf"
+            android:title="@string/pdf_upload"/>
+    </group>
+
+
+    <item
+        android:title="">
+
+        <menu>
+            <item
+                android:id="@+id/nav_profile"
+                android:icon="@drawable/person"
+                android:title="@string/profile"/>
+
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/settings"
+                android:title="@string/settings"/>
+
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/logout"
+                android:title="@string/log_out"/>
+
+        </menu>
+
+    </item>
+
+</menu>

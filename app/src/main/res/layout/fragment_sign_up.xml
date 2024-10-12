@@ -42,19 +42,19 @@
 
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/editTextFirstName"
         android:layout_width="320dp"
         android:layout_height="52dp"
         android:layout_marginStart="10dp"
-        android:autofillHints="emailAddress"
+        android:autofillHints="name"
         android:background="#40282828"
         android:drawableStart="@drawable/baseline_person_24"
         android:drawablePadding="10dp"
-        android:hint="@string/example_mail"
-        android:inputType="textEmailAddress"
+        android:hint="@string/sample_name"
+        android:inputType="textPersonName"
         android:paddingStart="10dp"
         android:textColor="@color/white"
-        android:textColorHint="@color/gruvbox_dark"
+        android:textColorHint="#99282828"
         android:textSize="15sp"
         app:cornerRadius="19dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -62,45 +62,7 @@
         app:layout_constraintHorizontal_bias="0.419"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.436"
-        tools:ignore="RtlSymmetry">
-
-    </EditText>
-
-    <CheckBox
-        android:id="@+id/checkBoxRememberMe"
-        android:layout_width="140dp"
-        android:layout_height="51dp"
-        android:text="@string/remember_me"
-        android:textColor="@color/grey"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.103"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.661" />
-
-    <EditText
-        android:id="@+id/editTextConfirmPassword"
-        android:layout_width="320dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="10dp"
-        android:autofillHints="password"
-        android:background="#41282828"
-        android:drawableStart="@drawable/lock"
-        android:drawablePadding="10dp"
-        android:hint="@string/password_hint"
-        android:inputType="textPassword"
-        android:paddingStart="10dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/gruvbox_dark"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.432"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.517"
+        app:layout_constraintVertical_bias="0.327"
         tools:ignore="RtlSymmetry">
 
     </EditText>
@@ -118,14 +80,91 @@
         android:inputType="textPassword"
         android:paddingStart="10dp"
         android:textColor="@color/white"
-        android:textColorHint="@color/gruvbox_dark"
+        android:textColorHint="#99282828"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.444"
+        app:layout_constraintHorizontal_bias="0.432"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.602"
+        app:layout_constraintVertical_bias="0.651"
+        tools:ignore="RtlSymmetry">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextConfirmPassword"
+        android:layout_width="320dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="10dp"
+        android:autofillHints="password"
+        android:background="#41282828"
+        android:drawableStart="@drawable/lock"
+        android:drawablePadding="10dp"
+        android:hint="@string/password_hint"
+        android:inputType="textPassword"
+        android:paddingStart="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="#99282828"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.432"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.569"
+        tools:ignore="RtlSymmetry">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="320dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="10dp"
+        android:autofillHints="emailAddress"
+        android:background="#40282828"
+        android:drawableStart="@drawable/baseline_person_24"
+        android:drawablePadding="10dp"
+        android:hint="@string/example_mail"
+        android:inputType="textEmailAddress"
+        android:paddingStart="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="#99282828"
+        android:textSize="15sp"
+        app:cornerRadius="19dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.432"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.488"
+        tools:ignore="RtlSymmetry">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextLastName"
+        android:layout_width="320dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="10dp"
+        android:autofillHints="name"
+        android:background="#40282828"
+        android:drawableStart="@drawable/baseline_person_24"
+        android:drawablePadding="10dp"
+        android:hint="@string/sample_surname"
+        android:inputType="textPersonName"
+        android:paddingStart="10dp"
+        android:textColor="@color/white"
+        android:textColorHint="#99282828"
+        android:textSize="15sp"
+        app:cornerRadius="19dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.419"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.408"
         tools:ignore="RtlSymmetry">
 
     </EditText>

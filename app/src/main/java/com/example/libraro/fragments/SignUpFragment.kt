@@ -3,22 +3,22 @@ package com.example.libraro.fragments
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.libraro.R
 import com.example.libraro.databinding.FragmentSignUpBinding
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SignUpFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
+    private lateinit var fstore: FirebaseFirestore
     private var _binding: FragmentSignUpBinding? = null
     private val binding get() = _binding!!
 
@@ -37,13 +37,14 @@ class SignUpFragment : Fragment() {
         binding.imageView.setOnClickListener {
             findNavController().navigate(R.id.action_signUpFragment_to_homeAccountFragment)
         }
-        binding.textViewSignUp.setOnClickListener {  // Add this block
+        binding.textViewSignUp.setOnClickListener {
             findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
         }
 
         // Firebase Authentication
         binding.btnSignUp.setOnClickListener {
             auth = FirebaseAuth.getInstance()
+            fstore = FirebaseFirestore.getInstance()
             binding.progressBar2.visibility = View.VISIBLE
             val email = binding.editTextEmail.text.toString()
             val password = binding.editTextPassword.text.toString()
@@ -55,6 +56,37 @@ class SignUpFragment : Fragment() {
                     auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
                         if(it.isSuccessful){
                             Handler(Looper.getMainLooper()).postDelayed({
+
+                                // storing the user's data into the database
+                                val userId = auth.currentUser?.uid.toString()
+                                val currentTimestamp = System.currentTimeMillis()
+
+                                val documentReference: DocumentReference = fstore.collection("users").document(userId)
+
+                                val user: MutableMap<String, Any> = mutableMapOf(
+                                    "firstName" to binding.editTextFirstName.text.toString(),
+                                    "lastName" to binding.editTextLastName.text.toString(),
+                                    "emailAddress" to binding.editTextEmail.text.toString(),
+                                    "profilePicture" to "",
+                                    "totalReadingTime" to 0L,
+                                    "booksCompleted" to 0,
+                                    "purchasedBooks" to listOf<String>(),
+                                    "favoriteBooks" to listOf<String>(),
+                                    "wishlistBooks" to listOf<String>(),
+                                    "readingProgress" to mapOf<String, Any>(),
+                                    "themePreference" to "light",
+                                    "lastLoginDate" to currentTimestamp
+                                )
+                                documentReference.set(user)
+                                    .addOnSuccessListener {
+                                        Toast.makeText(requireContext(), "Success saving data into database", Toast.LENGTH_SHORT)
+                                            .show()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Toast.makeText(requireContext(), "$e", Toast.LENGTH_SHORT)
+                                            .show()
+                                    }
+
                                 binding.progressBar2.visibility = View.GONE
                                 findNavController().navigate(R.id.action_signUpFragment_to_signInFragment)
                             }, 1000)
