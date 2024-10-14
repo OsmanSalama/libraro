@@ -62,7 +62,6 @@ class SignInFragment : Fragment() {
                             binding.progressBar.visibility = View.GONE
                             binding.textViewMessages.setText(R.string.msgLoginFailed)
                         }, 1000)
-
                     }
                 }
             } else {
@@ -72,6 +71,10 @@ class SignInFragment : Fragment() {
                 }, 1000)
 
             }
+        }
+
+        binding.textViewForgetPassword.setOnClickListener{
+            findNavController().navigate(R.id.action_signInFragment_to_passwordResetFragment)
         }
     }
 }

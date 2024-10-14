@@ -1,5 +1,7 @@
 package com.example.libraro.fragments
 
+import android.annotation.SuppressLint
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,8 +10,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -20,16 +20,12 @@ import androidx.core.view.MenuProvider
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.findViewTreeViewModelStoreOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.libraro.R
 import com.google.firebase.auth.FirebaseAuth
-import org.w3c.dom.Text
-import com.bumptech.glide.Glide
 import com.example.libraro.adapter.BooksAdapter
 import com.example.libraro.model.Book
-import com.example.libraro.model.User
 import com.google.firebase.firestore.FirebaseFirestore
 
 class HomeFragment : Fragment() {
@@ -37,7 +33,9 @@ class HomeFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var bookAdapter: BooksAdapter
     private val bookList = mutableListOf<Book>()
+    private val crimeBooksList = mutableListOf<Book>()
     private val db = FirebaseFirestore.getInstance()
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,14 +44,9 @@ class HomeFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
         val toolbar = view.findViewById<Toolbar>(R.id.custom_toolbar)
-
-        // code to the set the toolbar as the actionbar
         (activity as? AppCompatActivity)?.setSupportActionBar(toolbar)
 
-        // Get the DrawerLayout from MainActivity
         val drawerLayout = requireActivity().findViewById<DrawerLayout>(R.id.drawer_layout)
-
-        // Set up ActionBarDrawerToggle
         actionBarDrawerToggle = ActionBarDrawerToggle(
             requireActivity(),
             drawerLayout,
@@ -62,19 +55,12 @@ class HomeFragment : Fragment() {
             R.string.drawer_close
         )
 
-        // setting the menu icon on the left of the bar
-        //(activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        //toolbar.setNavigationIcon(R.drawable.ic_menu)
-
-        // Sync the state of ActionBarDrawerToggle
         drawerLayout.addDrawerListener(actionBarDrawerToggle)
         actionBarDrawerToggle.syncState()
 
-        // Enable home button (drawer toggle button)
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationIcon(R.drawable.ic_menu)
 
-        // click listener when menu icon is clicked
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 Toast.makeText(requireContext(), "Pressed", Toast.LENGTH_SHORT).show()
@@ -85,19 +71,26 @@ class HomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        auth = FirebaseAuth.getInstance()
-
         super.onViewCreated(view, savedInstanceState)
+
+        auth = FirebaseAuth.getInstance()
         setupMenu()
 
-        // Setup RecyclerView
-        val bookRecyclerView = view.findViewById<RecyclerView>(R.id.bookRecyclerView)
-        val layoutManager = GridLayoutManager(requireContext(), 5) // Change here to use GridLayoutManager
-        bookRecyclerView.layoutManager = layoutManager
-        bookAdapter = BooksAdapter(bookList)
-        bookRecyclerView.adapter = bookAdapter
+        recyclerView = view.findViewById(R.id.recyclerviewBooks)
 
-        // Fetch data from Firestore
+        val orientation = resources.configuration.orientation
+
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
+        } else if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            recyclerView.layoutManager = GridLayoutManager(requireContext(), 6)
+        }
+
+
+        bookAdapter = BooksAdapter(bookList)
+        recyclerView.adapter = bookAdapter
+
+
         fetchBooksFromFirestore()
     }
 
@@ -120,18 +113,45 @@ class HomeFragment : Fragment() {
     }
 
     private fun fetchBooksFromFirestore() {
-        db.collection("books").get()
+        val collectionRef = db.collection("books")
+        collectionRef.get()
             .addOnSuccessListener { result ->
+                bookList.clear()
                 for (document in result) {
-                    val book = document.toObject(Book::class.java)
-                    bookList.add(book)
+                    try {
+                        val data = document.data
+                        Log.d("HomeFragment", "Document data: $data")
+
+                        val book = document.toObject(Book::class.java)
+                        book.id = document.id
+
+                        if(book.category == "Crime") {
+                            crimeBooksList.add(book)
+                        }else if(book.category == "Fiction"){
+                            bookList.add(book)
+                        }
+
+                        Log.d("HomeFragment", "Added book: ${book.title}")
+                    } catch (e: Exception) {
+                        Log.e("HomeFragment", "Error processing document ${document.id}", e)
+                    }
                 }
-                bookAdapter.notifyDataSetChanged()
+                Log.d("HomeFragment", "Fetched ${bookList.size} books")
+                updateUI()
             }
-            .addOnFailureListener { e ->
-                Log.e(tag,"Error loading data: $e")
+            .addOnFailureListener { exception ->
+                Log.e("HomeFragment", "Error fetching documents", exception)
+                Toast.makeText(context, "Failed to load books: ${exception.message}", Toast.LENGTH_LONG).show()
             }
     }
 
-
+    @SuppressLint("NotifyDataSetChanged")
+    private fun updateUI() {
+        if (bookList.isEmpty()) {
+            Toast.makeText(requireContext(), "No books found", Toast.LENGTH_SHORT).show()
+        } else {
+            bookAdapter.notifyDataSetChanged()
+            Toast.makeText(requireContext(), "Crime Books: ${crimeBooksList.size}", Toast.LENGTH_SHORT).show()
+        }
+    }
 }

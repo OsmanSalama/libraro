@@ -5,7 +5,7 @@
     android:id="@+id/fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_background"
+    android:background="#121212"
     tools:context=".fragments.HomeAccountFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -22,23 +22,23 @@
             android:id="@+id/custom_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/gruvbox_dark"
+            android:background="@color/gruvbox_dark_soft"
             app:popupTheme="@style/PopupMenuOverlayStyle"
             app:theme="@style/PopupMenuStyle"
             app:title="Home"
-            app:titleTextColor="@android:color/white" />
+            app:titleTextColor="@color/white" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/bookRecyclerView"
+        android:id="@+id/recyclerviewBooks"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="false"
-        android:padding="16dp"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/book_item"
+        tools:viewBindingType="androidx.recyclerview.widget.RecyclerView"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

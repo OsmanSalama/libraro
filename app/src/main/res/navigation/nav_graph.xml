@@ -55,6 +55,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_signInFragment_to_passwordResetFragment"
+            app:destination="@id/passwordResetFragment" />
     </fragment>
 
     <fragment
@@ -85,5 +88,26 @@
         <action
             android:id="@+id/action_homeFragment_to_homeAccountFragment"
             app:destination="@id/homeAccountFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_nowReadingFragment"
+            app:destination="@id/nowReadingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nowReadingFragment"
+        android:name="com.example.libraro.fragments.NowReadingFragment"
+        android:label="fragment_now_reading"
+        tools:layout="@layout/fragment_now_reading" >
+        <action
+            android:id="@+id/action_nowReadingFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/passwordResetFragment"
+        android:name="com.example.libraro.fragments.PasswordResetFragment"
+        android:label="fragment_password_reset"
+        tools:layout="@layout/fragment_password_reset" >
+        <action
+            android:id="@+id/action_passwordResetFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
 </navigation>

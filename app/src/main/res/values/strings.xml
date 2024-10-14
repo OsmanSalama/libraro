@@ -52,4 +52,6 @@
     <string name="sample_surname">Doe</string>
     <string name="book_item">book item</string>
     <string name="book_title_sample">Book Title</string>
+    <string name="nonsense">Data to be displayed</string>
+    <string name="too_bad">Too Bad!</string>
 </resources>

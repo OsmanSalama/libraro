@@ -35,9 +35,13 @@ class BooksAdapter(private val bookList: List<Book>) : RecyclerView.Adapter<Book
         holder.titleTextView.text = book.title
         holder.categoryTextView.text = book.author
 
+
         Glide.with(holder.itemView.context)
             .load(book.coverImageUrl)
+            .placeholder(R.drawable.while_loading_cover)  // Placeholder image while loading
+            .error(R.drawable.book_item)          // Error image in case of failure
             .into(holder.imageViewCover)
+
 
     }
 

@@ -1,18 +1,22 @@
 package com.example.libraro
 
-import com.example.libraro.model.User
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import com.example.libraro.fragments.HomeFragment
+import com.example.libraro.model.Book
+import com.example.libraro.model.User
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,13 +27,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var emailTextView: TextView
     private lateinit var nameTextView: TextView
     private lateinit var navController: NavController
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        setupWindowInsets()
 
+
+        val window = window
+        // Allow the status bar to draw its own background
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        // Set the very top bar color
+        window.statusBarColor = ContextCompat.getColor(this, R.color.gruvbox_dark)
+
+
+        setupWindowInsets()
         initializeViews()
         setupNavigation()
         setupFirebase()
@@ -64,6 +77,7 @@ class MainActivity : AppCompatActivity() {
 
         auth.currentUser?.let { user ->
             emailTextView.text = user.email
+            nameTextView.text = fetchUserData().firstName
             navController.navigate(R.id.homeFragment)
         } ?: run {
             navController.navigate(R.id.homeAccountFragment)
@@ -71,35 +85,49 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavigationItemListener(navigationView: NavigationView) {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
+
+        val homeFragment: HomeFragment? =
+            supportFragmentManager.findFragmentByTag("homeFragment") as HomeFragment?
+
         navigationView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_logout -> logoutUser()
                 R.id.nav_settings -> Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show()
                 R.id.nav_profile -> Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show()
+                R.id.nav_nowReading -> navController.navigate(R.id.nowReadingFragment)
+                R.id.nav_home -> navController.navigate(R.id.homeFragment)
+
             }
             navigationDrawerLayout.closeDrawers()
             true
         }
     }
 
-    private fun fetchUserDataAndUpdateUI(db: FirebaseFirestore, userId: String) {
-        db.collection("users").document(userId).get()
-            .addOnSuccessListener { document ->
-                if (document != null && document.exists()) {
-                    val user = document.toObject(User::class.java)
-                    user?.let {
-                        val userFullName = "${it.firstName} ${it.lastName}"
-                        nameTextView.text = userFullName
+    private fun fetchUserData(): User {
+        val collectionRef = db.collection("users")
+        var currentUser: User = User()
+        collectionRef.get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    try {
+                        val data = document.data
+                        if(document.id == auth.currentUser?.uid){
+                            currentUser = document.toObject(User::class.java)
+                        }
+
+                    } catch (e: Exception) {
+                        Log.e("HomeFragment", "Error loading user's data", e)
                     }
-                } else {
-                    nameTextView.text = "com.example.libraro.model.User Not Found"
                 }
+                Log.d("HomeFragment", "Fetched current user")
             }
             .addOnFailureListener { exception ->
-                nameTextView.text = "Error Loading com.example.libraro.model.User"
-                Log.e("MainActivity", "Error fetching user data", exception)
+                Log.e("HomeFragment", "Error fetching documents", exception)
+                Toast.makeText(this, "Failed to load books: ${exception.message}", Toast.LENGTH_LONG).show()
             }
-
+        return currentUser
     }
 
     private fun logoutUser() {

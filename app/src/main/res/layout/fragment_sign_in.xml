@@ -103,23 +103,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.911"
+        app:layout_constraintHorizontal_bias="0.944"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.696" />
-
-    <CheckBox
-        android:id="@+id/checkBoxRememberMe"
-        android:layout_width="139dp"
-        android:layout_height="41dp"
-        android:text="@string/remember_me"
-        android:textColor="@color/grey"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.136"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.698" />
+        app:layout_constraintVertical_bias="0.693" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_SignIn"
@@ -178,22 +165,22 @@
 
     <TextView
         android:id="@+id/textViewMessages"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
         android:text=""
         android:textColor="@color/red"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.178"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.512" />
+        app:layout_constraintVertical_bias="0.499" />
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="413dp"
-        android:layout_height="278dp"
+        android:layout_width="399dp"
+        android:layout_height="268dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/header_image"
         android:scaleType="fitXY"
