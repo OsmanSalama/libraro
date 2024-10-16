@@ -5,11 +5,11 @@
         android:title="@string/home"
         android:icon="@drawable/ic_home"/>
 
-    <item android:id="@+id/nav_categories"
+    <item android:id="@+id/categories_nav"
         android:title="@string/categories"
         android:icon="@drawable/category"/>
 
-    <item android:id="@+id/nav_favorite"
+    <item android:id="@+id/favorite_nav"
         android:title="@string/favourite"
-        android:icon="@drawable/ic_favorite"/>
+        android:icon="@drawable/wishlist_icon"/>
 </menu>

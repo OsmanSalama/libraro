@@ -57,4 +57,10 @@
     <string name="latest_uploads">Latest Uploads</string>
     <string name="sample_book_name">Book Name</string>
     <string name="sample_author">Author</string>
+    <string name="read_now">Read Now</string>
+    <string name="sample_rating">5.0</string>
+    <string name="rating_stars">rating stars</string>
+    <string name="book_cover_image">book cover image</string>
+    <string name="book_description">Book Description</string>
+    <string name="price_sample">price £0</string>
 </resources>

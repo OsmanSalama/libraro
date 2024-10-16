@@ -37,6 +37,7 @@ android {
 
     buildFeatures{
         viewBinding = true
+        dataBinding = true
     }
 }
 
@@ -52,6 +53,7 @@ dependencies {
     implementation(libs.firebase.database)
     implementation(libs.places)
     implementation(libs.firebase.firestore)
+    implementation(libs.androidx.databinding.runtime)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

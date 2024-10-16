@@ -20,4 +20,9 @@
         <item name="android:textSize">@dimen/bottom_nav_text_size</item>
     </style>
 
+    <style name="CustomButton" parent="Widget.AppCompat.Button">
+        <item name="android:backgroundTint">#458588</item> <!-- Your desired color -->
+    </style>
+
+
 </resources>

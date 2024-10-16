@@ -3,20 +3,17 @@ package com.example.libraro
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.example.libraro.fragments.HomeFragment
 import com.example.libraro.model.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -36,12 +33,14 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        val window = window
-        // Allow the status bar to draw its own background
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        // Set the very top bar color
-        window.statusBarColor = ContextCompat.getColor(this, R.color.gruvbox_dark_soft)
+        setupWindowInsets()
+        initializeViews()
+        setupNavigation()
+        setupFirebase()
+        setupBottomNavigation()
+    }
 
+    private fun setupBottomNavigation() {
         // hiding bottom navigation bar if the current page is the AccountHomeFragment,
         // SignInFragment, or the SignUpFragment
         val navHostFragment = supportFragmentManager
@@ -62,10 +61,30 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        setupWindowInsets()
-        initializeViews()
-        setupNavigation()
-        setupFirebase()
+        bottomNavigationView.setOnItemSelectedListener{ item ->
+            when(item.itemId){
+
+
+                R.id.home_nav -> {
+                    Toast.makeText(this, "home has been clicked", Toast.LENGTH_SHORT).show()
+                    true
+                }
+
+                R.id.categories_nav -> {
+                    Toast.makeText(this, "categories has been clicked", Toast.LENGTH_SHORT).show()
+                    true
+                }
+
+                R.id.favorite_nav -> {
+                    Toast.makeText(this, "favorites has been clicked", Toast.LENGTH_SHORT).show()
+                    true
+                }
+
+                else -> {
+                    false
+                }
+            }
+        }
     }
 
     private fun setupWindowInsets() {
@@ -145,10 +164,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun logoutUser() {
-        AlertDialog.Builder(this).apply {
+        val alertDialog = AlertDialog.Builder(this).apply {
             setTitle("Confirm")
             setMessage("Are you sure you would like to logout?")
-            setPositiveButton("YES") { _, _ ->
+            setPositiveButton("YES") { dialog, _ ->
                 try {
                     auth.signOut()
                     navController.navigate(R.id.action_homeFragment_to_homeAccountFragment)
@@ -156,9 +175,16 @@ class MainActivity : AppCompatActivity() {
                     e.printStackTrace()
                     Toast.makeText(this@MainActivity, "Error logging out", Toast.LENGTH_SHORT).show()
                 }
+                dialog.dismiss()
             }
             setNegativeButton("NO") { dialog, _ -> dialog.dismiss() }
-            create().show()
+        }.create()
+
+        alertDialog.setOnShowListener {
+            alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getColor(R.color.white))
+            alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getColor(R.color.white))
         }
+
+        alertDialog.show()
     }
 }

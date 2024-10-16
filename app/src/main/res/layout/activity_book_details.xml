@@ -1,11 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gruvbox_dark"
-    tools:context=".fragments.PasswordResetFragment">
+    android:background="@color/main_background"
+    android:fitsSystemWindows="true">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextStyle="@style/CustomToolbarTitle">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/custom_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/gruvbox_dark"
+            app:popupTheme="@style/PopupMenuOverlayStyle"
+            app:theme="@style/PopupMenuStyle"
+            app:title="Book Name"
+            app:titleTextColor="@color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/mainView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/scrollView">
+
+
+            <ImageView
+                android:id="@+id/imageViewCover"
+                android:layout_width="158dp"
+                android:layout_height="215dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="30dp"
+                android:contentDescription="@string/book_cover_image"
+                android:src="@drawable/while_loading_cover"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/mainView"  />
+
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="30dp"
+                android:ellipsize="none"
+                android:gravity="left"
+                android:text="@string/book_title_sample"
+                android:textColor="@color/gruvbox_very_dark"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imageViewCover"
+                app:layout_constraintTop_toTopOf="@+id/mainView" />
+
+            <TextView
+                android:id="@+id/textViewAuthor"
+                android:layout_width="178dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:gravity="left"
+                android:text="@string/sample_author"
+                android:textColor="@color/btn_light_gruvbox_grey"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imageViewCover"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+
+            <ImageView
+                android:id="@+id/imageViewRating"
+                android:layout_width="118dp"
+                android:layout_height="23dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:contentDescription="@string/rating_stars"
+                android:src="@drawable/five_stars"
+                app:layout_constraintStart_toEndOf="@+id/imageViewCover"
+                app:layout_constraintTop_toBottomOf="@+id/textViewAuthor" />
+
+            <TextView
+                android:id="@+id/textViewRating"
+                android:layout_width="49dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/libre_baskerville"
+                android:text="@string/sample_rating"
+                android:textColor="@color/gruvbox_dark_soft"
+                android:textColorLink="@color/gruvbox_dark"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imageViewRating"
+                app:layout_constraintTop_toBottomOf="@+id/textViewAuthor" />
+
+            <Button
+                android:id="@+id/btnReadNow"
+                android:layout_width="132dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="198dp"
+                android:background="@drawable/button_background"
+                android:backgroundTint="@color/gruvbox_blue"
+                android:text="@string/read_now"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@+id/imageViewCover"
+                app:layout_constraintTop_toTopOf="@+id/mainView" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginTop="48dp"
+                android:background="@color/gruvbox_dark"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewCover"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <TextView
+                android:id="@+id/textViewDescription"
+                android:layout_width="347dp"
+                android:layout_height="112dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/privacy_policy"
+                android:textColor="@color/gruvbox_dark"
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewDescriptionTitle" />
+
+            <TextView
+                android:id="@+id/textViewDescriptionTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:text="@string/book_description"
+                android:textColor="@color/gruvbox_dark"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <TextView
+                android:id="@+id/textViewPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/price_sample"
+                android:textColor="@color/gruvbox_very_dark"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/imageViewCover"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewRating" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 
 
-</FrameLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -34,6 +34,7 @@ class BooksAdapter(private val bookList: List<Book>) : RecyclerView.Adapter<Book
             .placeholder(R.drawable.while_loading_cover)
             .error(R.drawable.book_item)
             .into(holder.imageViewCover)
+
         holder.itemView.setOnClickListener {
             onBookClick?.invoke(book)
         }
