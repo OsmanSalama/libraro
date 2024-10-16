@@ -1,6 +1,7 @@
 package com.example.libraro.fragments
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
@@ -88,6 +89,13 @@ class HomeFragment : Fragment() {
 
 
         bookAdapter = BooksAdapter(bookList)
+
+        bookAdapter.onBookClick = {
+            val intent = Intent(requireContext(), BookDetailsActivity::class.java)
+            intent.putExtra("current_book", it)
+            startActivity(intent)
+        }
+
         recyclerView.adapter = bookAdapter
 
 
@@ -151,7 +159,6 @@ class HomeFragment : Fragment() {
             Toast.makeText(requireContext(), "No books found", Toast.LENGTH_SHORT).show()
         } else {
             bookAdapter.notifyDataSetChanged()
-            Toast.makeText(requireContext(), "Crime Books: ${crimeBooksList.size}", Toast.LENGTH_SHORT).show()
         }
     }
 }

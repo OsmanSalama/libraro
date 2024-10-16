@@ -91,6 +91,9 @@
         <action
             android:id="@+id/action_homeFragment_to_nowReadingFragment"
             app:destination="@id/nowReadingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_bookFragment"
+            app:destination="@id/bookFragment" />
     </fragment>
     <fragment
         android:id="@+id/nowReadingFragment"
@@ -109,5 +112,13 @@
         <action
             android:id="@+id/action_passwordResetFragment_to_signInFragment"
             app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookFragment"
+        android:name="com.example.libraro.fragments.BookFragment"
+        android:label="BookFragment" >
+        <action
+            android:id="@+id/action_bookFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

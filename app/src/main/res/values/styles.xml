@@ -15,4 +15,9 @@
         <item name="android:textColor">@color/white</item>
         <item name="colorControlHighlight">@color/gruvbox_dark_soft</item>
     </style>
+
+    <style name="BottomNavigationViewItem" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">@dimen/bottom_nav_text_size</item>
+    </style>
+
 </resources>

@@ -2,6 +2,7 @@ package com.example.libraro
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
@@ -14,9 +15,10 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.libraro.fragments.HomeFragment
-import com.example.libraro.model.Book
 import com.example.libraro.model.User
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -34,13 +36,31 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-
         val window = window
         // Allow the status bar to draw its own background
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
         // Set the very top bar color
-        window.statusBarColor = ContextCompat.getColor(this, R.color.gruvbox_dark)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.gruvbox_dark_soft)
 
+        // hiding bottom navigation bar if the current page is the AccountHomeFragment,
+        // SignInFragment, or the SignUpFragment
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController: NavController = navHostFragment.navController
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
+        bottomNavigationView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.signInFragment, R.id.signUpFragment, R.id.homeAccountFragment -> {
+                    bottomNavigationView.visibility = View.GONE
+                }
+                else -> {
+                    bottomNavigationView.visibility = View.VISIBLE
+                }
+            }
+        }
 
         setupWindowInsets()
         initializeViews()
@@ -73,7 +93,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupFirebase() {
         auth = FirebaseAuth.getInstance()
-        val db = FirebaseFirestore.getInstance()
 
         auth.currentUser?.let { user ->
             emailTextView.text = user.email
@@ -88,9 +107,6 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        val homeFragment: HomeFragment? =
-            supportFragmentManager.findFragmentByTag("homeFragment") as HomeFragment?
-
         navigationView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_logout -> logoutUser()
@@ -98,7 +114,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_profile -> Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show()
                 R.id.nav_nowReading -> navController.navigate(R.id.nowReadingFragment)
                 R.id.nav_home -> navController.navigate(R.id.homeFragment)
-
             }
             navigationDrawerLayout.closeDrawers()
             true
@@ -107,12 +122,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun fetchUserData(): User {
         val collectionRef = db.collection("users")
-        var currentUser: User = User()
+        var currentUser = User()
         collectionRef.get()
             .addOnSuccessListener { result ->
                 for (document in result) {
                     try {
-                        val data = document.data
                         if(document.id == auth.currentUser?.uid){
                             currentUser = document.toObject(User::class.java)
                         }
