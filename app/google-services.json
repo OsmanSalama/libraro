@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "533454066964",
+    "project_id": "libraro2024",
+    "storage_bucket": "libraro2024.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533454066964:android:e728c5f7d31565c1c29e01",
+        "android_client_info": {
+          "package_name": "com.example.libraro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "533454066964-gobj1p5kq2g5b4e2p67o7e644he4m8pl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtL7T0iFfNn0ec1E8R4YagoVXSC81BN2Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "533454066964-gobj1p5kq2g5b4e2p67o7e644he4m8pl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
