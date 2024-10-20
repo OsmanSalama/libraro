@@ -7,7 +7,6 @@
     android:background="@color/main_background"
     android:fitsSystemWindows="true">
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
@@ -33,21 +32,20 @@
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/mainView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/scrollView">
-
 
             <ImageView
                 android:id="@+id/imageViewCover"
@@ -58,7 +56,7 @@
                 android:contentDescription="@string/book_cover_image"
                 android:src="@drawable/while_loading_cover"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/mainView"  />
+                app:layout_constraintTop_toTopOf="@+id/mainView" />
 
             <TextView
                 android:id="@+id/textViewTitle"
@@ -67,13 +65,15 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="30dp"
                 android:ellipsize="none"
+                android:fontFamily="@font/merriweather_light"
                 android:gravity="left"
                 android:text="@string/book_title_sample"
                 android:textColor="@color/gruvbox_very_dark"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imageViewCover"
-                app:layout_constraintTop_toTopOf="@+id/mainView" />
+                app:layout_constraintTop_toTopOf="@+id/mainView"
+                tools:ignore="RtlHardcoded" />
 
             <TextView
                 android:id="@+id/textViewAuthor"
@@ -83,11 +83,13 @@
                 android:layout_marginTop="4dp"
                 android:gravity="left"
                 android:text="@string/sample_author"
+                android:fontFamily="@font/merriweather_light"
                 android:textColor="@color/btn_light_gruvbox_grey"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imageViewCover"
-                app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewTitle"
+                tools:ignore="RtlHardcoded" />
 
             <ImageView
                 android:id="@+id/imageViewRating"
@@ -117,10 +119,10 @@
 
             <Button
                 android:id="@+id/btnReadNow"
-                android:layout_width="132dp"
-                android:layout_height="46dp"
+                android:layout_width="143dp"
+                android:layout_height="49dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="198dp"
+                android:layout_marginTop="196dp"
                 android:background="@drawable/button_background"
                 android:backgroundTint="@color/gruvbox_blue"
                 android:text="@string/read_now"
@@ -128,24 +130,16 @@
                 app:layout_constraintStart_toEndOf="@+id/imageViewCover"
                 app:layout_constraintTop_toTopOf="@+id/mainView" />
 
-            <View
-                android:id="@+id/view"
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginTop="48dp"
-                android:background="@color/gruvbox_dark"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewCover"
-                tools:layout_editor_absoluteX="0dp" />
-
             <TextView
                 android:id="@+id/textViewDescription"
-                android:layout_width="347dp"
-                android:layout_height="112dp"
+                android:layout_width="339dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="12dp"
+                android:fontFamily="@font/merriweather_light"
                 android:text="@string/privacy_policy"
                 android:textColor="@color/gruvbox_dark"
-                android:textSize="17sp"
+                android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewDescriptionTitle" />
 
@@ -153,15 +147,17 @@
                 android:id="@+id/textViewDescriptionTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="68dp"
+                android:fontFamily="@font/merriweather_light"
                 android:gravity="center_horizontal"
                 android:text="@string/book_description"
                 android:textColor="@color/gruvbox_dark"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.075"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view" />
+                app:layout_constraintTop_toBottomOf="@+id/btnReadNow" />
 
             <TextView
                 android:id="@+id/textViewPrice"
@@ -175,12 +171,236 @@
                 app:layout_constraintStart_toEndOf="@+id/imageViewCover"
                 app:layout_constraintTop_toBottomOf="@+id/imageViewRating" />
 
+            <TextView
+                android:id="@+id/textViewReadMore"
+                android:layout_width="110dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="140dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/read_more"
+                android:textColor="@color/gruvbox_very_dark"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewDescription" />
 
+            <ImageButton
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/now_reading"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.172"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewCover"
+                app:srcCompat="@drawable/clock" />
+
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="39dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="12dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/display_menu"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewCover"
+                app:srcCompat="@drawable/menu_squared" />
+
+            <ImageButton
+                android:id="@+id/imageViewAddToWishList"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="4dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/favourite"
+                android:padding="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/imageView4"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewCover"
+                app:srcCompat="@drawable/add_box" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="44dp"
+                android:background="@color/gruvbox_dark"
+                app:layout_constraintTop_toBottomOf="@id/textViewReadMore"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <TextView
+                android:id="@+id/textViewBookDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:fontFamily="@font/merriweather_light"
+                android:gravity="center_horizontal"
+                android:text="@string/about_this_book"
+                android:textColor="@color/gruvbox_dark"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.074"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+            <ImageView
+                android:id="@+id/imageViewDarkBackground"
+                android:layout_width="match_parent"
+                android:layout_height="239dp"
+                android:layout_marginTop="28dp"
+                android:contentDescription="@string/background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewBookDetails"
+                app:srcCompat="@drawable/dark_header" />
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="78dp"
+                android:layout_height="74dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="44dp"
+                android:contentDescription="@string/number_of_pages"
+                app:layout_constraintStart_toStartOf="@+id/imageViewDarkBackground"
+                app:layout_constraintTop_toTopOf="@+id/imageViewDarkBackground"
+                app:srcCompat="@drawable/outlined_book" />
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="78dp"
+                android:layout_height="74dp"
+                android:layout_marginTop="44dp"
+                android:contentDescription="@string/reading_hours"
+                app:layout_constraintEnd_toStartOf="@+id/imageView10"
+                app:layout_constraintStart_toEndOf="@+id/imageView8"
+                app:layout_constraintTop_toTopOf="@+id/imageViewDarkBackground"
+                app:srcCompat="@drawable/outfilled_clock" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="78dp"
+                android:layout_height="74dp"
+                android:layout_marginTop="44dp"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="@string/number_of_words"
+                app:layout_constraintEnd_toEndOf="@+id/imageViewDarkBackground"
+                app:layout_constraintTop_toTopOf="@+id/imageViewDarkBackground"
+                app:srcCompat="@drawable/book_with_letter" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.00982801" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="99dp"
+                android:layout_height="124dp"
+                android:layout_marginStart="156dp"
+                android:layout_marginTop="72dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewDarkBackground" />
+
+            <TextView
+                android:id="@+id/textViewPagesValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/_148"
+                android:textSize="25sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+            <TextView
+                android:id="@+id/textViewReadTimeValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/sample_number"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toStartOf="@+id/textViewWordsValue"
+                app:layout_constraintHorizontal_bias="0.55"
+                app:layout_constraintStart_toEndOf="@+id/textViewPagesValue"
+                app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+
+            <TextView
+                android:id="@+id/textViewWordsValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="28dp"
+                android:text="@string/sample_no_words"
+                android:textSize="25sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+            <TextView
+                android:id="@+id/textViewPages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/pages"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPagesValue" />
+
+            <TextView
+                android:id="@+id/textViewWords"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="36dp"
+                android:text="@string/words"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewWordsValue" />
+
+            <TextView
+                android:id="@+id/textViewReadTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/reading_hour"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/textViewWords"
+                app:layout_constraintHorizontal_bias="0.507"
+                app:layout_constraintStart_toEndOf="@+id/textViewPages"
+                app:layout_constraintTop_toBottomOf="@+id/textViewReadTimeValue" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="36dp"
+                android:fontFamily="@font/merriweather_light"
+                android:gravity="center_horizontal"
+                android:text="@string/reviews"
+                android:textColor="@color/gruvbox_dark"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewDarkBackground" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </androidx.core.widget.NestedScrollView>
-
-
-
-
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -24,5 +24,11 @@
         <item name="android:backgroundTint">#458588</item> <!-- Your desired color -->
     </style>
 
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here -->
+        <item name="selectableItemBackgroundBorderless">@android:attr/selectableItemBackgroundBorderless</item>
+    </style>
+
+
 
 </resources>

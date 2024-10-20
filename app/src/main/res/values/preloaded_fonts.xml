@@ -4,5 +4,6 @@
         <item>@font/acme</item>
         <item>@font/italiana</item>
         <item>@font/libre_baskerville</item>
+        <item>@font/merriweather_light</item>
     </array>
 </resources>

@@ -1,32 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/gruvbox_dark"
-    tools:context=".fragments.PasswordResetFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/textViewBookName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textColor="#665C54"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="40sp"
-        android:layout_marginBottom="70dp"
-        android:text="@string/sample_book_name" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/gruvbox_dark"
+        tools:context=".fragments.BookFragment">
 
-    <TextView
-        android:id="@+id/textViewAuthorName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textColor="#665C54"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="40sp"
-        android:text="@string/sample_author" />
 
-</FrameLayout>
+
+    </FrameLayout>
+</layout>

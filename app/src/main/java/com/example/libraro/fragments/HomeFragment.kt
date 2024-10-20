@@ -142,6 +142,7 @@ class HomeFragment : Fragment() {
                         Log.d("HomeFragment", "Added book: ${book.title}")
                     } catch (e: Exception) {
                         Log.e("HomeFragment", "Error processing document ${document.id}", e)
+                        Toast.makeText(requireContext(), "Error adding book", Toast.LENGTH_SHORT).show()
                     }
                 }
                 Log.d("HomeFragment", "Fetched ${bookList.size} books")

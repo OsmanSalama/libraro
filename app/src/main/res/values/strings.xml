@@ -63,4 +63,17 @@
     <string name="book_cover_image">book cover image</string>
     <string name="book_description">Book Description</string>
     <string name="price_sample">price £0</string>
+    <string name="read_more">Read More</string>
+    <string name="about_this_book">About This Book</string>
+    <string name="_148">148</string>
+    <string name="background">background</string>
+    <string name="number_of_pages">number of pages</string>
+    <string name="reading_hours">reading hours</string>
+    <string name="number_of_words">number of words</string>
+    <string name="sample_number">12</string>
+    <string name="sample_no_words">129k</string>
+    <string name="pages">Pages</string>
+    <string name="words">Words</string>
+    <string name="reading_hour">Reading Hours</string>
+    <string name="reviews">Reviews</string>
 </resources>

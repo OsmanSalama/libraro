@@ -1,9 +1,11 @@
 package com.example.libraro.fragments
 
-import android.content.res.Configuration
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.Toast
@@ -11,10 +13,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.transition.Visibility
 import com.bumptech.glide.Glide
 import com.example.libraro.R
 import com.example.libraro.databinding.ActivityBookDetailsBinding
 import com.example.libraro.model.Book
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlin.math.round
 
 class BookDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBookDetailsBinding
@@ -40,8 +45,24 @@ class BookDetailsActivity : AppCompatActivity() {
             uiSetup(book)
         }
         setupHeaderColor()
-    }
+        
+        binding.imageViewAddToWishList.setOnClickListener {
+            Toast.makeText(this, "Shit", Toast.LENGTH_SHORT).show()
+        }
 
+        binding.btnReadNow.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putParcelable("currentBook", book)
+            val fragment = BookFragment()
+            fragment.arguments = bundle
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit()
+
+        }
+
+    }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.home_menu, menu)
         return true
@@ -71,13 +92,22 @@ class BookDetailsActivity : AppCompatActivity() {
             else -> R.drawable.five_stars
         }
         imageView.setImageResource(drawableId)
-    }
+        }
 
+    @SuppressLint("SetTextI18n")
     private fun uiSetup(book: Book){
         binding.textViewTitle.text = book.title
         binding.textViewAuthor.text = book.author
-        binding.textViewDescription.text = book.description
-        binding.textViewPrice.text = "Price: £${book.price.toString()}"
+
+        if(book.description.length<= 260){
+            binding.textViewDescription.text = book.description
+            binding.textViewReadMore.visibility = View.GONE
+        }else{
+            binding.textViewDescription.text = cutDescription(book)
+        }
+
+
+        binding.textViewPrice.text = "Price: £${book.price}"
         binding.textViewRating.text = book.rating.toString()
         setRatingImage(book.rating, binding.imageViewRating)
 
@@ -86,14 +116,28 @@ class BookDetailsActivity : AppCompatActivity() {
             .placeholder(R.drawable.while_loading_cover)
             .error(R.drawable.book_item)
             .into(binding.imageViewCover)
+
+        binding.textViewReadMore.setOnClickListener {
+            if(binding.textViewDescription.text.length <= 260){
+                binding.textViewDescription.text = book.description
+                binding.textViewReadMore.text = "Read Less"
+            }else{
+                binding.textViewDescription.text = cutDescription(book)
+                binding.textViewReadMore.text = "Read More"
+            }
+        }
+
+        val totalWordsInThousands: Double = round(book.totalWords.toDouble()/1000)
+        binding.textViewWordsValue.text = "${totalWordsInThousands}K"
+        binding.textViewPagesValue.text = book.numberOfPages.toString()
+        binding.textViewReadTimeValue.text = book.hoursToRead.toString()
     }
 
+    private fun cutDescription(book: Book) ="${book.description.substring(0, 250)}..."
+
     private fun setupHeaderColor(){
-        // Get the window associated with the current activity
         val window = window
-        // Allow the status bar to draw its own background
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        // Set the very top bar color
         window.statusBarColor = ContextCompat.getColor(this, R.color.gruvbox_dark_soft)
     }
 }
