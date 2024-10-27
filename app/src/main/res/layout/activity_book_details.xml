@@ -69,7 +69,7 @@
                 android:gravity="left"
                 android:text="@string/book_title_sample"
                 android:textColor="@color/gruvbox_very_dark"
-                android:textSize="22sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imageViewCover"
                 app:layout_constraintTop_toTopOf="@+id/mainView"
