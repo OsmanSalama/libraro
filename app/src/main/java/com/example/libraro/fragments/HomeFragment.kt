@@ -135,6 +135,7 @@ class HomeFragment : Fragment() {
 
                         if(book.category == "Crime") {
                             crimeBooksList.add(book)
+                            bookList.add(book)
                         }else if(book.category == "Fiction"){
                             bookList.add(book)
                         }

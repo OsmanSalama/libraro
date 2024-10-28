@@ -29,6 +29,6 @@
         <item name="selectableItemBackgroundBorderless">@android:attr/selectableItemBackgroundBorderless</item>
     </style>
 
-
+    <style name="Theme.Libraro.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar"> </style>
 
 </resources>

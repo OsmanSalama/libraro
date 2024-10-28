@@ -2,10 +2,10 @@ package com.example.libraro.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.Toast
@@ -13,12 +13,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import androidx.transition.Visibility
 import com.bumptech.glide.Glide
 import com.example.libraro.R
 import com.example.libraro.databinding.ActivityBookDetailsBinding
 import com.example.libraro.model.Book
-import com.google.firebase.firestore.FirebaseFirestore
 import kotlin.math.round
 
 class BookDetailsActivity : AppCompatActivity() {
@@ -29,7 +27,6 @@ class BookDetailsActivity : AppCompatActivity() {
         // binding setup
         binding = ActivityBookDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         val book = intent.getParcelableExtra<Book>("current_book")
 
@@ -47,18 +44,24 @@ class BookDetailsActivity : AppCompatActivity() {
         setupHeaderColor()
         
         binding.imageViewAddToWishList.setOnClickListener {
-            Toast.makeText(this, "Shit", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "nice", Toast.LENGTH_SHORT).show()
         }
 
         binding.btnReadNow.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putParcelable("currentBook", book)
-            val fragment = BookFragment()
-            fragment.arguments = bundle
+                val bundle = Bundle()
+                bundle.putParcelable("currentBook", book)
+                val fragment = BookFragment()
+                fragment.arguments = bundle
 
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .commit()
+                binding.appBarLayout.layoutParams.height = 0
+                binding.appBarLayout.requestLayout()
+                (binding.appBarLayout.parent as? ViewGroup)?.removeView(binding.appBarLayout)
+                supportActionBar?.hide()
+                setTheme(R.style.Theme_Libraro_NoActionBar)
+
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commit()
 
         }
 
