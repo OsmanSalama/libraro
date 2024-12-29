@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid
-        android:color = "@color/main_background"/>
+        android:color = "@color/gruvbox_dark_soft"/>
 
     <corners
-        android:topLeftRadius="40sp"
-        android:topRightRadius="40sp"/>
+        android:topLeftRadius="15dp"
+        android:bottomLeftRadius="15dp"
+        android:bottomRightRadius="15dp"
+        android:topRightRadius="15dp"/>
 
     <padding
         android:top="10dp"

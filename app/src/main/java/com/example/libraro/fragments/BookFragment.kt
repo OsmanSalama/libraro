@@ -1,6 +1,7 @@
 package com.example.libraro.fragments
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,7 +13,6 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.example.libraro.R
 import com.example.libraro.databinding.FragmentBookBinding
 import com.example.libraro.model.Book
@@ -28,6 +28,7 @@ class BookFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentBookBinding.inflate(inflater, container, false)
+        @Suppress("DEPRECATION")
         book = arguments?.getParcelable("currentBook")
 
         if (book != null) {
@@ -130,7 +131,9 @@ class BookFragment : Fragment() {
             subtitle = book?.author
 
             setNavigationOnClickListener {
-                activity?.onBackPressed()
+                val intent = Intent(requireContext(), BookDetailsActivity::class.java)
+                intent.putExtra("current_book", book)
+                startActivity(intent)
             }
 
             inflateMenu(R.menu.book_reading_menu)
@@ -148,6 +151,7 @@ class BookFragment : Fragment() {
         // Load the book
         loadBook()
     }
+
 
     private fun loadBook() {
         // Use book's URL if available, otherwise use default

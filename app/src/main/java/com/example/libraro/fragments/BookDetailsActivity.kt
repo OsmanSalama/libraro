@@ -1,6 +1,7 @@
 package com.example.libraro.fragments
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.example.libraro.MainActivity
 import com.example.libraro.R
 import com.example.libraro.databinding.ActivityBookDetailsBinding
 import com.example.libraro.model.Book
@@ -28,14 +30,17 @@ class BookDetailsActivity : AppCompatActivity() {
         binding = ActivityBookDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        @Suppress("DEPRECATION")
         val book = intent.getParcelableExtra<Book>("current_book")
 
         val toolbar = findViewById<Toolbar>(R.id.custom_toolbar)
         setSupportActionBar(toolbar)
         toolbar.title = book?.title
         toolbar.setNavigationIcon(R.drawable.baseline_arrow_back_24)
+
         toolbar.setNavigationOnClickListener {
-            onBackPressedDispatcher.onBackPressed()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
         if (book != null) {

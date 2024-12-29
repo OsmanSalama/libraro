@@ -29,7 +29,7 @@ import com.example.libraro.adapter.BooksAdapter
 import com.example.libraro.model.Book
 import com.google.firebase.firestore.FirebaseFirestore
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(){
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
     private lateinit var auth: FirebaseAuth
     private lateinit var bookAdapter: BooksAdapter
@@ -97,8 +97,6 @@ class HomeFragment : Fragment() {
         }
 
         recyclerView.adapter = bookAdapter
-
-
         fetchBooksFromFirestore()
     }
 
@@ -106,6 +104,7 @@ class HomeFragment : Fragment() {
         (requireActivity() as MenuHost).addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.home_menu, menu)
+
             }
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
@@ -117,6 +116,7 @@ class HomeFragment : Fragment() {
                     else -> false
                 }
             }
+
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 

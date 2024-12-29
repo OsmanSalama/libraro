@@ -78,4 +78,7 @@
     <string name="reviews">Reviews</string>
     <string name="add_to_favourite">Add to Favourite</string>
     <string name="add_to_now_reading">Add to Now Reading</string>
+    <string name="crime_and_thriller">Crime and Thriller</string>
+    <string name="all_categories">All Categories</string>
+    <string name="hala_hala">Hala Hala</string>
 </resources>

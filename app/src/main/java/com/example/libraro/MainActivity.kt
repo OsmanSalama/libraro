@@ -14,6 +14,9 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.example.libraro.fragments.CategoriesFragment
+import com.example.libraro.fragments.FavouritesFragment
+import com.example.libraro.fragments.HomeFragment
 import com.example.libraro.model.User
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -62,21 +65,68 @@ class MainActivity : AppCompatActivity() {
         }
 
         bottomNavigationView.setOnItemSelectedListener{ item ->
-            when(item.itemId){
+            var currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
 
+            // Change the value of the current fragment everytime the user navigates
+            navController.addOnDestinationChangedListener { _, destination, _ ->
+                currentFragment = when (destination.id) {
+                    R.id.homeFragment -> HomeFragment()
+                    R.id.categoriesFragment -> CategoriesFragment()
+                    R.id.favouritesFragment -> FavouritesFragment()
+                    else -> null
+                }
+            }
+
+            when (item.itemId) {
 
                 R.id.home_nav -> {
-                    Toast.makeText(this, "home has been clicked", Toast.LENGTH_SHORT).show()
+                    when (currentFragment) {
+                        is HomeFragment -> {
+                            println("Already on HomeFragment")
+                        }
+
+                        is CategoriesFragment -> {
+                            navController.navigate(R.id.action_categoriesFragment_to_homeFragment)
+                        }
+
+                        is FavouritesFragment -> {
+                            navController.navigate(R.id.action_favouritesFragment_to_homeFragment)
+                        }
+                    }
                     true
                 }
 
                 R.id.categories_nav -> {
-                    Toast.makeText(this, "categories has been clicked", Toast.LENGTH_SHORT).show()
+                    when (currentFragment) {
+                        is HomeFragment -> {
+                            navController.navigate(R.id.action_homeFragment_to_categoriesFragment)
+                        }
+
+                        is CategoriesFragment -> {
+                            println("Already on CategoriesFragment")
+                        }
+
+                        is FavouritesFragment -> {
+                            navController.navigate(R.id.action_favouritesFragment_to_categoriesFragment)
+                        }
+                    }
                     true
                 }
 
                 R.id.favorite_nav -> {
-                    Toast.makeText(this, "favorites has been clicked", Toast.LENGTH_SHORT).show()
+                    when (currentFragment) {
+                        is HomeFragment -> {
+                            navController.navigate(R.id.action_homeFragment_to_favouritesFragment)
+                        }
+
+                        is CategoriesFragment -> {
+                            navController.navigate(R.id.action_categoriesFragment_to_favouritesFragment)
+                        }
+
+                        is FavouritesFragment -> {
+                            println("Already on FavouritesFragment")
+                        }
+                    }
                     true
                 }
 
