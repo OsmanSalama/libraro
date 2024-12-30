@@ -87,7 +87,6 @@ class HomeFragment : Fragment(){
             recyclerView.layoutManager = GridLayoutManager(requireContext(), 6)
         }
 
-
         bookAdapter = BooksAdapter(bookList)
 
         bookAdapter.onBookClick = {

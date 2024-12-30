@@ -81,9 +81,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
+                android:fontFamily="@font/merriweather_light"
                 android:gravity="left"
                 android:text="@string/sample_author"
-                android:fontFamily="@font/merriweather_light"
                 android:textColor="@color/btn_light_gruvbox_grey"
                 android:textSize="15sp"
                 android:textStyle="bold"
@@ -306,15 +306,6 @@
                 app:layout_constraintGuide_percent="0.00982801" />
 
             <TextView
-                android:id="@+id/textView5"
-                android:layout_width="99dp"
-                android:layout_height="124dp"
-                android:layout_marginStart="156dp"
-                android:layout_marginTop="72dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageViewDarkBackground" />
-
-            <TextView
                 android:id="@+id/textViewPagesValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -383,12 +374,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewReadTimeValue" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/reviews_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="40dp"
                 android:fontFamily="@font/merriweather_light"
+                android:foregroundGravity="top"
                 android:gravity="center_horizontal"
                 android:text="@string/reviews"
                 android:textColor="@color/gruvbox_dark"
@@ -396,11 +388,65 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageViewDarkBackground" />
+
+            <EditText
+                android:id="@+id/editTextWriteReview"
+                android:layout_width="351dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="16dp"
+                android:autofillHints="name"
+                android:background="#40282828"
+                android:gravity="top"
+                android:hint="@string/review_hint"
+                android:inputType="textMultiLine"
+                android:lines="8"
+                android:maxLines="10"
+                android:minLines="6"
+                android:paddingStart="10dp"
+                android:scrollbars="vertical"
+                android:textColor="@color/white"
+                android:textColorHint="#99282828"
+                android:textSize="16sp"
+                app:cornerRadius="19dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.448"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reviews_title"
+                tools:ignore="LabelFor,RtlSymmetry" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginTop="44dp"
+                android:background="@color/gruvbox_dark"
+                app:layout_constraintBottom_toTopOf="recyclerViewReviews"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editTextWriteReview" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewReviews"
+                android:layout_width="414dp"
+                android:layout_height="909dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider2"
+                app:layout_constraintVertical_bias="1.0"
+                tools:listitem="@layout/review_item" />
+
+            <FrameLayout
+                android:id="@+id/fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:layout_editor_absoluteX="-3dp"
+                tools:layout_editor_absoluteY="14dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </androidx.core.widget.NestedScrollView>
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

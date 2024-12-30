@@ -81,4 +81,7 @@
     <string name="crime_and_thriller">Crime and Thriller</string>
     <string name="all_categories">All Categories</string>
     <string name="hala_hala">Hala Hala</string>
+    <string name="name_sample">Osman Salama</string>
+    <string name="review_sample">a very bad book I dont recommend it to anyone</string>
+    <string name="review_hint">write a review</string>
 </resources>
